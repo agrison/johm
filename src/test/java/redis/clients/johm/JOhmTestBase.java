@@ -38,7 +38,7 @@ public class JOhmTestBase extends Assert {
 
             listenPort = findFreePort();
             final Process redisServerProcess = 
-                    Runtime.getRuntime().exec(redisServerPath + " --port " + listenPort + " --maxheap 10mb");
+                    Runtime.getRuntime().exec(redisServerPath + " --port " + listenPort + " --maxheap 10485760");
             final StreamGobbler errorGobbler = new
                     StreamGobbler(redisServerProcess.getErrorStream(), "ERROR");
             final StreamGobbler outputGobbler = new

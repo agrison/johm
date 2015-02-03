@@ -37,8 +37,13 @@ public class JOhmTestBase extends Assert {
             }
 
             listenPort = findFreePort();
+            String command = redisServerPath + " --port " + listenPort;
+            // only set maxheap for windows
+            if(SystemUtils.IS_OS_WINDOWS) {
+                command = command + " --maxheap 10mb"; 
+            }
             final Process redisServerProcess = 
-                    Runtime.getRuntime().exec(redisServerPath + " --port " + listenPort + " --maxheap 10485760");
+                    Runtime.getRuntime().exec(command);
             final StreamGobbler errorGobbler = new
                     StreamGobbler(redisServerProcess.getErrorStream(), "ERROR");
             final StreamGobbler outputGobbler = new
